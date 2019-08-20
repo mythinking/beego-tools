@@ -104,3 +104,4 @@ if __name__ == '__main__':
         title = ['item_id','price','quantity','sold','title','totalSoldQuantity','url','img']
     tm = TM_producs(storename, cookie, title)
     tm.main()
+    print "success"
