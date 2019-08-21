@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 21:44:56
+ * @LastEditTime: 2019-08-21 11:23:20
+ * @LastEditors: Please set LastEditors
+ */
 package controllers
 
 import (
@@ -7,8 +14,6 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"os/exec"
-	"strconv"
-	"strings"
 )
 
 type CrawlerController struct {
@@ -23,24 +28,14 @@ type CrawlerController struct {
 //}
 
 func (c *CrawlerController) Log()  {
-	line, _ := c.GetInt("line", 0)
+	res := c.Success();
 
-	itotal := 0
-	result := ""
-	res := c.Sucess();
-
-	total, err := c.CmdShell("bash", "-c", "cat logs/project.log |grep [N] |wc -l")
+	result, err := c.CmdShell("bash", "-c", "tail -n 100 bats/tmall.log")
 	if err != nil {
 		res = c.Error(fmt.Sprintf("%v", err))
 	}
-	itotal, err = strconv.Atoi(strings.Replace(total, "\n", "", -1))
-	if line > 0 {
-		total = string(itotal-line)
-	}
-	fmt.Println(total)
-	result, _ =  c.CmdShell("bash", "-c", "cat logs/project.log |grep [N] |tail -n " + total)
 
-	res = c.SucessData(map[string]interface{}{"line":itotal,"content":result})
+	res = c.SuccessData(result)
 
 	c.Data["json"] = res;
 	c.ServeJSON();

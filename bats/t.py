@@ -1,3 +1,10 @@
+'''
+@Description: In User Settings Edit
+@Author: your name
+@Date: 2019-08-20 20:51:24
+@LastEditTime: 2019-08-21 11:27:10
+@LastEditors: Please set LastEditors
+'''
 # -*- coding: utf-8 -*-
 import sys
 from datetime import datetime
@@ -5,6 +12,10 @@ import time
 import random
 #reload(sys)
 #sys.setdefaultencoding('utf8')
+
+def formatLog(str):
+    t = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print("[{}]{}".format(t, str))
 
 class TM_producs(object):
     def __init__(self,storename, cookie, title):
@@ -28,24 +39,28 @@ class TM_producs(object):
         self.filename = '{}_{}.csv'.format(self.storename, datenum)
         self.title = title
 
+
     def main(self):
         '''循环爬取所有页面宝贝'''
         total_page = 3
         for i in range(1,total_page+1):
-            print('总计{}页商品，已经提取第{}页'.format(total_page,i))
+            formatLog('总计{}页商品，已经提取第{}页'.format(total_page,i))
             time.sleep(1+random.random())
 
 if __name__ == '__main__':
+    formatLog("start...")
     storename = 'juehuai'
     if len(sys.argv) < 3:
-        print("params error")
+        formatLog("params error")
         sys.exit()
     storename = sys.argv[1]
     cookie = sys.argv[2]
+    formatLog("start {}".format(storename))
     if len(sys.argv) == 4:
         title = sys.argv[3].split(",")
     else:
         title = ['item_id','price','quantity','sold','title','totalSoldQuantity','url','img']
     tm = TM_producs(storename, cookie, title)
     tm.main()
-    print("success")
+    formatLog("success")
+    formatLog("end {}".format(storename))

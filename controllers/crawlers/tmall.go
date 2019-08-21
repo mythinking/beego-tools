@@ -1,9 +1,20 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 21:10:06
+ * @LastEditTime: 2019-08-21 13:51:58
+ * @LastEditors: Please set LastEditors
+ */
 package crawlers
 
 import (
 	"beego-tools/controllers"
 	"fmt"
+	"os"
+	"io"
+	"crypto/md5"
 	"github.com/astaxie/beego/logs"
+	"github.com/astaxie/beego"
 )
 
 type TmallController struct {
@@ -27,7 +38,7 @@ func (c *TmallController) CreateJob()  {
 	logs.Notice("title: ", title)
 	logs.Notice("开始执行任务: ")
 
-	res := c.Sucess();
+	res := c.Success();
 	if storename == "" {
 		res = c.Error("storename不能为空哦！")
 	}
@@ -37,12 +48,36 @@ func (c *TmallController) CreateJob()  {
 	if title == "" {
 		res = c.Error("title不能为空哦！")
 	}
-	result, err := c.CmdShell("python", "bats/t.py", storename, cookie, title)
+	result, err := c.CmdShell("python", "bats/tmall.py", storename, cookie, title)
 	if err != nil {
 		res = c.Error(fmt.Sprintf("%v", err))
 	}
-	logs.Notice(result)
+	var f *os.File
+	filename := "bats/tmall.log"
+	if checkFileIsExist(filename) { //如果文件存在
+		f, _ = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件
+	} else {
+		f, _ = os.Create(filename) //创建文件
+	}
+	io.WriteString(f, result) //写入文件(字符串)
+
+	w := md5.New()
+	io.WriteString(w, title)   //将str写入到w中
+	md5str := fmt.Sprintf("%x", w.Sum(nil))  //w.Sum(nil)将w的hash转成[]byte格式
+	url := beego.AppConfig.String("url")
+	res = c.SuccessData(fmt.Sprintf("%s%s_%s.csv", url, storename, md5str));
 
 	c.Data["json"] = res;
 	c.ServeJSON();
+}
+
+/**
+ * 判断文件是否存在  存在返回 true 不存在返回false
+ */
+ func checkFileIsExist(filename string) bool {
+	var exist = true
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		exist = false
+	}
+	return exist
 }

@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 21:53:28
+ * @LastEditTime: 2019-08-21 13:58:29
+ * @LastEditors: Please set LastEditors
+ */
 $(function () {
     $('#myTabs a').click(function (e) {
         e.preventDefault()
@@ -34,11 +41,13 @@ $(function () {
         $('#myModal').modal('toggle');
     }
 
+    var ilog;
     function createJob() {
         var title = new Array();
         $('form input[name="title"]:checked').each(function(){
             title.push($(this).val());
         });
+        $('#send').text($('#send').data('doing')).attr('disabled', 'disabled');
         $.post("/v1/crawlers/eshop",
         {
             storename:$('form #storename').val(),
@@ -47,28 +56,31 @@ $(function () {
         },
         function(data,status){
             if (data) {
+                $('#send').text($('#send').data('start')).removeAttr('disabled');
                 if (data.Code !== 0) {
                     alertDialog(data.Msg);
+                } else {
+                    //操作成功
+                    $('#download').removeClass('hide');
+                    $('#download').append('<p><a href="'+data.Data+'">'+data.Data+'</a></p>');
                 } 
             } 
             console.log(data, status)
         });
+        clearInterval(ilog);
+        ilog = setInterval(function(){
+            getLog()
+        }, 1000);
     }
-    Line = 0;
-    setInterval(function(){
-        getLog(Line)
-    }, 1000);
     function getLog(line) {
-        line = line || 0;
-        $.get("/v1/crawlers/log", {
-            line:line
-        },
+        $.get("/v1/crawlers/log", {},
         function(data, status){
             console.log(data);
-            if (data) {
-                Line = data.Data.line
-                if (data.Data.content) {
-                    $('#log').append(data.Data.content)
+            if (data && data.Data) {
+                if ($('#log').text() == data.Data) {
+                    clearInterval(ilog);
+                } else {
+                    $('#log').text(data.Data)
                     var ele = document.getElementById('log');
                     ele.scrollTop = ele.scrollHeight;
                 }

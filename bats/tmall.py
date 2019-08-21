@@ -1,3 +1,10 @@
+'''
+@Description: tmall crawler
+@Author: zz
+@Date: 2019-08-19 21:06:38
+@LastEditTime: 2019-08-21 11:27:02
+@LastEditors: Please set LastEditors
+'''
 # -*- coding: utf-8 -*-
 import requests
 import json
@@ -8,10 +15,22 @@ import re
 from datetime import datetime
 import time
 import sys
+import hashlib
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+def formatLog(str):
+    t = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print("[{}]{}".format(t, str))
+
 class TM_producs(object):
+    '''
+    @description: 
+    @param {string} storename
+    @param {string} cookie
+    @param {list} title
+    @return: 
+    '''
     def __init__(self,storename, cookie, title):
         self.storename = storename
         self.url = 'https://{}.m.tmall.com'.format(storename)
@@ -30,7 +49,7 @@ class TM_producs(object):
                 "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
         }
         datenum = datetime.now().strftime('%Y%m%d%H%M')
-        self.filename = '{}_{}.csv'.format(self.storename, datenum)
+        self.filename = '{}_{}.csv'.format(self.storename, hashlib.md5(",".join(title)).hexdigest())
         self.title = title
         self.get_file()
 
@@ -86,7 +105,7 @@ class TM_producs(object):
         total_page = self.get_totalpage()
         for i in range(1,total_page+1):
             self.get_products(i)
-            print('总计{}页商品，已经提取第{}页'.format(total_page,i))
+            formatLog('总计{}页商品，已经提取第{}页'.format(total_page,i))
             time.sleep(1+random.random())
             if i%10 == 0:
 		time.sleep(2+random.random())
@@ -94,14 +113,16 @@ class TM_producs(object):
 if __name__ == '__main__':
     storename = 'juehuai'
     if len(sys.argv) < 3:
-        print 'params error!'
+        formatLog('params error!')
         sys.exit()
     storename = sys.argv[1]
     cookie = sys.argv[2]
+    formatLog("start {}".format(storename))
     if len(sys.argv) == 4:
         title = sys.argv[3].split(",")
     else:
         title = ['item_id','price','quantity','sold','title','totalSoldQuantity','url','img']
     tm = TM_producs(storename, cookie, title)
     tm.main()
-    print "success"
+    formatLog("success")
+    formatLog("end {}".format(storename))

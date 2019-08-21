@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 17:54:45
+ * @LastEditTime: 2019-08-21 11:21:45
+ * @LastEditors: Please set LastEditors
+ */
 package common
 
 type Common struct {
@@ -13,10 +20,10 @@ func (c *Common) Error(msg string)  (j JSONStruct) {
 	return JSONStruct{1, msg, struct{}{}}
 }
 
-func (c *Common) SucessData(data interface{})  (j JSONStruct) {
+func (c *Common) SuccessData(data interface{})  (j JSONStruct) {
 	return JSONStruct{0, "操作成功", data}
 }
 
-func (c *Common) Sucess()  (j JSONStruct) {
-	return c.SucessData(struct{}{})
+func (c *Common) Success()  (j JSONStruct) {
+	return c.SuccessData(struct{}{})
 }
