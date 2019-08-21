@@ -1,11 +1,12 @@
+
+# -*- coding: utf-8 -*-
 '''
 @Description: tmall crawler
 @Author: zz
 @Date: 2019-08-19 21:06:38
-@LastEditTime: 2019-08-21 11:27:02
+@LastEditTime: 2019-08-21 14:53:25
 @LastEditors: Please set LastEditors
 '''
-# -*- coding: utf-8 -*-
 import requests
 import json
 import csv
@@ -49,9 +50,8 @@ class TM_producs(object):
                 "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
         }
         datenum = datetime.now().strftime('%Y%m%d%H%M')
-        self.filename = '{}_{}.csv'.format(self.storename, hashlib.md5(",".join(title)).hexdigest())
+        self.filename = '{}/{}_{}.csv'.format(sys.path[0],self.storename, hashlib.md5(",".join(title)).hexdigest())
         self.title = title
-        self.get_file()
 
     def get_file(self):
         '''创建一个含有标题的表格'''
@@ -68,24 +68,25 @@ class TM_producs(object):
         endurl = '/shop/shop_auction_search.do?sort=s&p=1&page_size=12&from=h5&ajson=1&_tm_source=tmallsearch&callback=jsonp_{}'
         url = self.url + endurl.format(num)
         html = requests.get(url,headers=self.headers).text
-        fo = open("req.html", "w")
-        fo.write(html)
-        fo.close()
+        if html.find("login.taobao.com") != -1:
+            formatLog("请重新登录淘宝账号后，复制cookie信息")
+            sys.exit(0)
         infos = re.findall('\(({.*})\)',html)[0]
         infos = json.loads(infos)
         totalpage = infos.get('total_page')
-        return int(totalpage)
-        #return 1
+        self.get_file()
+        #return int(totalpage)
+        return 1
 
     def get_products(self,page):
         '''提取单页商品列表'''
         num = random.randint(83739921, 87739530)
         endurl = '/shop/shop_auction_search.do?sort=s&p={}&page_size=12&from=h5&ajson=1&_tm_source=tmallsearch&callback=jsonp_{}'
         url = self.url + endurl.format(page,num)
-        fo = open("req.html", "w")
         html = requests.get(url, headers=self.headers).text
-        fo.write(html)
-        fo.close()
+        if html.find("login.taobao.com") != -1:
+            formatLog("请重新登录淘宝账号后，复制cookie信息")
+            sys.exit(0)
         infos = re.findall('\(({.*})\)', html)[0]
         infos = json.loads(infos)
         products = infos.get('items')

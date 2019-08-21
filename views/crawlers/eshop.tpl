@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 17:00:57
- * @LastEditTime: 2019-08-21 13:57:32
+ * @LastEditTime: 2019-08-21 14:41:45
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -122,8 +122,7 @@
       <div class="row">
         <div class="col-sm-12">
           <h4>执行日志：</h4>
-          <pre id="log" class="pre-scrollable">
-          </pre>
+          <pre id="log" class="pre-scrollable"></pre>
         </div>
       </div>
     </div>

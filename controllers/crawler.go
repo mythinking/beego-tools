@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:44:56
- * @LastEditTime: 2019-08-21 11:23:20
+ * @LastEditTime: 2019-08-21 15:04:37
  * @LastEditors: Please set LastEditors
  */
 package controllers
@@ -12,6 +12,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"time"
 	"github.com/astaxie/beego"
 	"os/exec"
 )
@@ -30,7 +31,7 @@ type CrawlerController struct {
 func (c *CrawlerController) Log()  {
 	res := c.Success();
 
-	result, err := c.CmdShell("bash", "-c", "tail -n 100 bats/tmall.log")
+	result, err := c.CmdShell("bash", "-c", "tail -n 100 bats/tmall.log." + time.Now().Format("2006-01-02"))
 	if err != nil {
 		res = c.Error(fmt.Sprintf("%v", err))
 	}

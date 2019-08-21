@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:53:28
- * @LastEditTime: 2019-08-21 13:58:29
+ * @LastEditTime: 2019-08-21 14:55:30
  * @LastEditors: Please set LastEditors
  */
 $(function () {
@@ -60,6 +60,9 @@ $(function () {
                 if (data.Code !== 0) {
                     alertDialog(data.Msg);
                 } else {
+                    setTimeout(() => {
+                        getLog()
+                    }, 100);
                     //操作成功
                     $('#download').removeClass('hide');
                     $('#download').append('<p><a href="'+data.Data+'">'+data.Data+'</a></p>');
@@ -76,7 +79,7 @@ $(function () {
         $.get("/v1/crawlers/log", {},
         function(data, status){
             console.log(data);
-            if (data && data.Data) {
+            if (data) {
                 if ($('#log').text() == data.Data) {
                     clearInterval(ilog);
                 } else {

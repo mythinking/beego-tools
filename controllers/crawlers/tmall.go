@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:10:06
- * @LastEditTime: 2019-08-21 13:51:58
+ * @LastEditTime: 2019-08-21 15:06:02
  * @LastEditors: Please set LastEditors
  */
 package crawlers
@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"os"
 	"io"
+	"time"
 	"crypto/md5"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego"
@@ -53,7 +54,7 @@ func (c *TmallController) CreateJob()  {
 		res = c.Error(fmt.Sprintf("%v", err))
 	}
 	var f *os.File
-	filename := "bats/tmall.log"
+	filename := "bats/tmall.log." + time.Now().Format("2006-01-02")
 	if checkFileIsExist(filename) { //如果文件存在
 		f, _ = os.OpenFile(filename, os.O_APPEND, 0666) //打开文件
 	} else {
