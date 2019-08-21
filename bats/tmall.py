@@ -4,7 +4,7 @@
 @Description: tmall crawler
 @Author: zz
 @Date: 2019-08-19 21:06:38
-@LastEditTime: 2019-08-21 14:53:25
+@LastEditTime: 2019-08-21 16:54:29
 @LastEditors: Please set LastEditors
 '''
 import requests
@@ -75,8 +75,8 @@ class TM_producs(object):
         infos = json.loads(infos)
         totalpage = infos.get('total_page')
         self.get_file()
-        #return int(totalpage)
-        return 1
+        return int(totalpage)
+        #return 1
 
     def get_products(self,page):
         '''提取单页商品列表'''
