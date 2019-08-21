@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:53:28
- * @LastEditTime: 2019-08-21 17:20:23
+ * @LastEditTime: 2019-08-21 17:31:21
  * @LastEditors: Please set LastEditors
  */
 $(function () {
@@ -88,6 +88,11 @@ $(function () {
                 $('#log').removeClass('hide');
                 if ($('#log').text() == data.Data) {
                     clearInterval(ilog);
+                    setTimeout(() => {
+                        ilog = setInterval(function(){
+                            getLog()
+                        }, 1000);
+                    }, 3000);
                 } else {
                     $('#log').text(data.Data)
                     var ele = document.getElementById('log');
