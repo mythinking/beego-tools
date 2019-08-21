@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 17:00:57
- * @LastEditTime: 2019-08-21 17:09:28
+ * @LastEditTime: 2019-08-21 18:38:13
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
     </ul>
   </header>
 
-  <div class="tab-content">
+  <div class="tab-content" style="margin-bottom: 50px">
     <div class="tab-pane fade in active" id="tmall">
       <div class="row">
         <div class="col-sm-12">
@@ -139,7 +139,7 @@
     line-height: 1.8;
     text-align: center;
     padding: 50px 0;
-    color: #999;">
+    color: #999;z-index: -99999; position:inherit;">
     <div class="author text-center">
       Official website:
       <a href="http://{{.Website}}">{{.Website}}</a> /

@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 09:58:09
- * @LastEditTime: 2019-08-21 16:28:42
+ * @LastEditTime: 2019-08-21 18:39:34
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -110,7 +110,11 @@
         </div>
     </div>
   </div>
-  <footer class="navbar-fixed-bottom">
+  <footer class="navbar-fixed-bottom" style="
+    line-height: 1.8;
+    text-align: center;
+    padding: 50px 0;
+    color: #999;z-index: -99999; position:inherit;">
     <div class="author">
       Official website:
       <a href="http://{{.Website}}">{{.Website}}</a> /
