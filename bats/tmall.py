@@ -4,7 +4,7 @@
 @Description: tmall crawler
 @Author: zz
 @Date: 2019-08-19 21:06:38
-@LastEditTime: 2019-08-21 16:54:29
+@LastEditTime: 2019-08-21 17:18:50
 @LastEditors: Please set LastEditors
 '''
 import requests
@@ -22,7 +22,11 @@ sys.setdefaultencoding('utf8')
 
 def formatLog(str):
     t = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print("[{}]{}".format(t, str))
+    d = datetime.now().strftime('%Y-%m-%d')
+    str = "[{}]{}".format(t, str)
+    with open(sys.path[0]+'/tmall.log.'+d,'a+') as f:
+        f.write(str+"\r\n")
+    print(str)
 
 class TM_producs(object):
     '''

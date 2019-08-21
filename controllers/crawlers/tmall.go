@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:10:06
- * @LastEditTime: 2019-08-21 16:52:29
+ * @LastEditTime: 2019-08-21 17:19:59
  * @LastEditors: Please set LastEditors
  */
 package crawlers
@@ -12,7 +12,6 @@ import (
 	"fmt"
 	"os"
 	"io"
-	"time"
 	"strings"
 	"crypto/md5"
 	"github.com/astaxie/beego/logs"
@@ -54,15 +53,7 @@ func (c *TmallController) CreateJob()  {
 	if err != nil {
 		res = c.Error(fmt.Sprintf("%v", err))
 	}
-	var f *os.File
-	filename := "bats/tmall.log." + time.Now().Format("2006-01-02")
-	if checkFileIsExist(filename) { //如果文件存在
-		f, _ = os.OpenFile(filename, os.O_RDWR, 0666) //打开文件
-	} else {
-		f, _ = os.Create(filename) //创建文件
-	}
-	io.WriteString(f, result) //写入文件(字符串)
-
+	// logs.Notice(res)
 	if strings.Index(result, "success") != -1 {
 		w := md5.New()
 		io.WriteString(w, title)   //将str写入到w中
@@ -72,8 +63,6 @@ func (c *TmallController) CreateJob()  {
 	} else {
 		res = c.Error(result[strings.LastIndex(result, "]")+1:])
 	}
-	io.WriteString(f, "执行完成！\r\n")
-	defer f.Close()
 
 	c.Data["json"] = res;
 	c.ServeJSON();

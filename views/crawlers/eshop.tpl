@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 17:00:57
- * @LastEditTime: 2019-08-21 16:43:38
+ * @LastEditTime: 2019-08-21 17:09:28
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -24,7 +24,11 @@
 <div class="container">
   <header>
     <div class="page-header">
-      <h1>电商爬虫系统 <small>欢迎使用</small></h1>
+      <h1>电商爬虫系统 <small>欢迎使用</small> 
+        <a href="/" class="btn btn-link btn-lg" title="返回首页">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        </a>
+      </h1>
     </div>
     <ul class="nav nav-pills" id="myTabs">
       <li role="presentation" class="active"><a href="#tmall">天猫</a></li>

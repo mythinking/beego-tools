@@ -2,7 +2,7 @@
 @Description: In User Settings Edit
 @Author: your name
 @Date: 2019-08-20 20:51:24
-@LastEditTime: 2019-08-21 11:27:10
+@LastEditTime: 2019-08-21 17:17:55
 @LastEditors: Please set LastEditors
 '''
 # -*- coding: utf-8 -*-
@@ -15,7 +15,11 @@ import random
 
 def formatLog(str):
     t = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print("[{}]{}".format(t, str))
+    d = datetime.now().strftime('%Y-%m-%d')
+    str = "[{}]{}".format(t, str)
+    with open(sys.path[0]+'/tmall.log.'+d,'a+') as f:
+        f.write(str+"\r\n")
+    print(str)
 
 class TM_producs(object):
     def __init__(self,storename, cookie, title):
