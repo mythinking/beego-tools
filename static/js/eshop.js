@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:53:28
- * @LastEditTime: 2019-08-21 14:55:30
+ * @LastEditTime: 2019-08-21 15:34:16
  * @LastEditors: Please set LastEditors
  */
 $(function () {
@@ -65,7 +65,8 @@ $(function () {
                     }, 100);
                     //操作成功
                     $('#download').removeClass('hide');
-                    $('#download').append('<p><a href="'+data.Data+'">'+data.Data+'</a></p>');
+                    $('#download').append('<p>'+(new Date()).toLocaleString()+'&nbsp;&nbsp;&nbsp;<a href="'+data.Data+'">'+data.Data+'</a></p>');
+                    alertDialog("任务执行成功, 请在执行结果里面下载最新文件！！！");
                 } 
             } 
             console.log(data, status)

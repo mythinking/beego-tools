@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 17:00:57
- * @LastEditTime: 2019-08-21 14:41:45
+ * @LastEditTime: 2019-08-21 15:31:21
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -98,7 +98,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">警告</h4>
+              <h4 class="modal-title" id="myModalLabel">提示</h4>
             </div>
             <div class="modal-body">
               <p id="myModal-text"></p>

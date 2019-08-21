@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:10:06
- * @LastEditTime: 2019-08-21 15:06:02
+ * @LastEditTime: 2019-08-21 15:40:20
  * @LastEditors: Please set LastEditors
  */
 package crawlers
@@ -13,6 +13,7 @@ import (
 	"os"
 	"io"
 	"time"
+	"strings"
 	"crypto/md5"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego"
@@ -62,11 +63,16 @@ func (c *TmallController) CreateJob()  {
 	}
 	io.WriteString(f, result) //写入文件(字符串)
 
-	w := md5.New()
-	io.WriteString(w, title)   //将str写入到w中
-	md5str := fmt.Sprintf("%x", w.Sum(nil))  //w.Sum(nil)将w的hash转成[]byte格式
-	url := beego.AppConfig.String("url")
-	res = c.SuccessData(fmt.Sprintf("%s%s_%s.csv", url, storename, md5str));
+	if strings.Index(result, "success") != -1 {
+		w := md5.New()
+		io.WriteString(w, title)   //将str写入到w中
+		md5str := fmt.Sprintf("%x", w.Sum(nil))  //w.Sum(nil)将w的hash转成[]byte格式
+		url := beego.AppConfig.String("url")
+		res = c.SuccessData(fmt.Sprintf("%s%s_%s.csv", url, storename, md5str));
+	} else {
+		res = c.Error(result[strings.LastIndex(result, "]")+1:])
+	}
+	io.WriteString(f, "执行完成！\r")
 
 	c.Data["json"] = res;
 	c.ServeJSON();

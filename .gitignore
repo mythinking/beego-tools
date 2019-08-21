@@ -33,3 +33,4 @@ bee
 
 logs
 bats/*.log
+bats/*.log.*
