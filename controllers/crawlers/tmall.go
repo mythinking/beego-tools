@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:10:06
- * @LastEditTime: 2019-08-21 15:40:20
+ * @LastEditTime: 2019-08-21 16:44:39
  * @LastEditors: Please set LastEditors
  */
 package crawlers
@@ -24,8 +24,8 @@ type TmallController struct {
 }
 
 func (c *TmallController) Index() {
-	c.Data["Website"] = "zhaozhe.ren"
-	c.Data["Email"] = "546604336@qq.com"
+	c.Data["Website"] = beego.AppConfig.String("Website")
+	c.Data["Email"] = beego.AppConfig.String("Email")
 	c.TplName = "crawlers/eshop.tpl"
 }
 
@@ -72,7 +72,7 @@ func (c *TmallController) CreateJob()  {
 	} else {
 		res = c.Error(result[strings.LastIndex(result, "]")+1:])
 	}
-	io.WriteString(f, "执行完成！\r")
+	io.WriteString(f, "执行完成！\r\n")
 
 	c.Data["json"] = res;
 	c.ServeJSON();

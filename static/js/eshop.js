@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 21:53:28
- * @LastEditTime: 2019-08-21 15:34:16
+ * @LastEditTime: 2019-08-21 16:38:42
  * @LastEditors: Please set LastEditors
  */
 $(function () {
@@ -13,6 +13,10 @@ $(function () {
             $('#myModal').modal('toggle');
             return
         }
+        $(this).tab('show')
+    });
+    $('#myTabs1 a').click(function (e) {
+        e.preventDefault()
         $(this).tab('show')
     });
     $("form").submit(function(){
@@ -81,6 +85,7 @@ $(function () {
         function(data, status){
             console.log(data);
             if (data) {
+                $('#log').removeClass('hide');
                 if ($('#log').text() == data.Data) {
                     clearInterval(ilog);
                 } else {

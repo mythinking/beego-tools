@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-08-20 09:58:09
+ * @LastEditTime: 2019-08-21 16:28:42
+ * @LastEditors: Please set LastEditors
+ -->
 <!DOCTYPE html>
 
 <html>
@@ -35,7 +42,7 @@
       background-position: center center;
       text-align: center;
       font-size: 42px;
-      padding: 250px 0 70px;
+      padding-top: 150px;
       font-weight: normal;
       text-shadow: 0px 1px 2px #ddd;
     }
@@ -75,12 +82,35 @@
 
 <body>
   <header>
-    <h1 class="logo">Welcome to Beego</h1>
+    <h1 class="logo">Welcome</h1>
     <div class="description">
-      Beego is a simple & powerful Go web framework which is inspired by tornado and sinatra.
+      这是一个简单的网站
     </div>
   </header>
-  <footer>
+  <div class="container">
+    <div class="row">
+      <p class="text-warning">功能列表</p>
+      <div class="bs-example" data-example-id="striped-table">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th width="30%">链接</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td><a href="/v1/crawlers/eshop" class="btn btn-info btn-xs active" role="button">电商爬虫</a></td>
+                <td>专用于爬取电商网站商品信息。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+  <footer class="navbar-fixed-bottom">
     <div class="author">
       Official website:
       <a href="http://{{.Website}}">{{.Website}}</a> /
@@ -91,5 +121,10 @@
   <div class="backdrop"></div>
 
   <script src="/static/js/reload.min.js"></script>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

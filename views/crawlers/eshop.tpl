@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-08-20 17:00:57
- * @LastEditTime: 2019-08-21 15:31:21
+ * @LastEditTime: 2019-08-21 16:43:38
  * @LastEditors: Please set LastEditors
  -->
 <!DOCTYPE html>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="checkbox-inline">
                   <label>
-                    <input type="checkbox" value="item_id" name="title" > id
+                    <input type="checkbox" value="item_id" name="title" > item_id
                   </label>
                 </div>
               </div>
@@ -78,7 +78,7 @@
               <label for="cookie" class="col-sm-2 control-label">登录信息</label>
               <div class="col-sm-10">
                 <textarea class="form-control" rows="5" id="cookie"></textarea>
-                <span id="helpBlock2" class="help-block">打开【天猫商城】登录后请求店铺，F12复制请求中[Request Headers][cookie]的值.</span>
+                <span id="helpBlock2" class="help-block">打开【天猫商城】登录后请求店铺，F12复制请求中[Request Headers->cookie]的值.</span>
               </div>
             </div>
             <div class="form-group">
@@ -111,24 +111,31 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <h4>执行结果：</h4>
-          <div class="row">
-            <div id="download" class="col-sm-offset-1 hide">
-              <p class="text-danger">下载链接:</p>
-            </div>
-          </div>
+          <ul class="nav nav-tabs" id="myTabs1">
+              <li role="presentation" class="active"><a href="#clog">日志</a></li>
+            <li role="presentation"><a href="#cresult">执行结果</a></li>
+          </ul>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <h4>执行日志：</h4>
-          <pre id="log" class="pre-scrollable"></pre>
+      
+      <div class="tab-content" style="margin-top:1px;">
+          <div class="tab-pane fade in active" id="clog">
+              <pre id="log" class="pre-scrollable hide"></pre>
+          </div>
+        <div class="tab-pane fade in" id="cresult">
+            <div id="download" class="col-sm-offset-1 hide">
+                <p class="text-danger">下载链接:</p>
+            </div>
         </div>
       </div>
     </div>
   </div>
 
-  <footer class="navbar-fixed-bottom">
+  <footer class="navbar-fixed-bottom" style="
+    line-height: 1.8;
+    text-align: center;
+    padding: 50px 0;
+    color: #999;">
     <div class="author text-center">
       Official website:
       <a href="http://{{.Website}}">{{.Website}}</a> /
